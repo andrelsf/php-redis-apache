@@ -1,0 +1,38 @@
+version: "3.5"
+
+networks:
+  net-app-redis:
+    name: php-redis
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.70.0.0/24
+
+services:
+  app-redis:
+    build: .docker/apache/
+    env_file: 
+      - ./app-redis/.env
+    volumes:
+      - ./app-redis/:/usr/src/app
+    ports: 
+      - "8081:80"
+    links:
+      - redis
+    restart: 
+      on-failure
+    networks:
+      net-app-redis:
+        ipv4_address: "172.70.0.2"
+
+  redis:
+    image: redis:5.0.7-alpine
+    expose:
+      - 6379
+    restart:
+      on-failure
+    networks:
+      net-app-redis:
+        ipv4_address: "172.70.0.3"
+

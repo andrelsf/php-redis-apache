@@ -1,0 +1,20 @@
+{
+    "name": "andrelsf/php-redis",
+    "description": "Learning PHP Redis",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andre L S Ferreira",
+            "email": "andre.dev.linux@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "predis/predis": "v1.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Redis\\": "src/"
+        }
+    }
+}
